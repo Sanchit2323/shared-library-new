@@ -10,3 +10,15 @@ def call(String projectKey, String sourcesDir, String sonarToken) {
            "-Dsonar.login=${sonarToken}"
     }
 }
+
+def call(String projectKey, String sourcesDir, String sonarToken, String binariesDir) {
+    def scannerHome = tool name: 'SonarQube-Scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+    withSonarQubeEnv('SonarQube') {
+        sh "${scannerHome}/bin/sonar-scanner " +
+           "-Dsonar.projectKey=${projectKey} " +
+           "-Dsonar.sources=${sourcesDir} " +
+           "-Dsonar.host.url=http://localhost:9000 " +
+           "-Dsonar.login=${sonarToken} " +
+           "-Dsonar.java.binaries=${binariesDir}"
+    }
+}
