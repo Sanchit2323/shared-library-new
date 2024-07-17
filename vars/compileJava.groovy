@@ -7,8 +7,8 @@ def callCompile(script) {
     script.sh 'mvn clean compile'
 }
 
-def callSonarAnalysis(String projectKey, String sourcesDir, String sonarToken) {
-    new SonarqubeJava().call(projectKey, sourcesDir, sonarToken)
+def callSonarAnalysis(String projectKey, String sourcesDir, String sonarToken, String binariesDir) {
+    new SonarqubeJava().call(projectKey, sourcesDir, sonarToken, binariesDir)
 }
 
 def callTests(script) {
